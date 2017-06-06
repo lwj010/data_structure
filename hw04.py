@@ -5,7 +5,7 @@
 
 class Node:
 
-    def __init__(self, newval):
+    def __init__(self, newval): 
         self.key = newval
         self.left = None
         self.right = None
@@ -107,7 +107,7 @@ class rb_tree:
 		self.root.color = "black"
 
 	def rb_min(self, tree):
-		while tree.left.key != None:
+		while tree.left.key != None:  
 			tree = tree.left
 		return tree
 
@@ -165,12 +165,12 @@ class rb_tree:
 				if w.left.color == "black" and w.right.color == "black":
 					w.color = "red"
 					x = x.parent
-				elif w.right.color == "black":
-					w.left.color = "black"
-					w.color = "red"
-					self.right_rotate(w)
-					w = x.parent.right
 				else:
+					if w.right.color == "black":
+						w.left.color = "black"
+						w.color = "red"
+						self.right_rotate(w)
+						w = x.parent.right
 					w.color = x.parent.color
 					x.parent.color = "black"
 					w.right.color = "black"
@@ -186,12 +186,12 @@ class rb_tree:
 				if w.right.color == "black" and w.left.color == "black":
 					w.color = "red"
 					x = x.parent
-				elif w.left.color == "black":
-					w.right.color == "black"
-					w.color = "red"
-					self.left_rotate(w)
-					w = x.parent.left
 				else:
+					if w.left.color == "black":
+						w.right.color == "black"
+						w.color = "red"
+						self.left_rotate(w)
+						w = x.parent.left		
 					w.color = x.parent.color
 					x.parent.color = "black"
 					w.left.color = "black"
@@ -273,33 +273,44 @@ lines = f.readlines()
 #f.close()
 
 
-
-
 tree_ = rb_tree()
 cannot_del = [ ]
-
 
 # >0 일때는 바로 insert, <0 일때는 확인후 있으면 delete, 
 # 0이면 inorder traversal후 저장된 결과 length 프린트
 for i in range(0,len(lines)):
-	if int(lines[i]) > 0:
-		tree_.rb_insert(Node(int(lines[i])))
-	if int(lines[i]) < 0:
-		if tree_.search(tree_.root, abs(int(lines[i]))).key == None:
-			cannot_del.append("%d is not in the tree" %int(lines[i]))
+	x = int(lines[i])
+	if x > 0:
+		tree_.rb_insert(Node(x))
+	elif x < 0:
+		searched = tree_.search(tree_.root, abs(x))
+		if searched.key == None:
+			cannot_del.append("%d is not in the tree" %x)
 		else:
-			tree_.rb_delete(tree_.search(tree_.root, abs(int(lines[i]))))
-	if int(lines[i]) == 0:
+			tree_.rb_delete(searched)
+	else:
 		tree_.inorder(tree_.root)
 		total = tree_.inorder_result
+		
+		# None 제거
+		total_withoutleaf = [ ]
+		for i in total:
+			if i is not None:
+				total_withoutleaf.append(i)
+
 		blacknodes = tree_.blacknode
+
+		# None 제거
 		blacknodes_withoutleaf = [ ]
 		for i in blacknodes:
 			if i is not None:
 				blacknodes_withoutleaf.append(i)
-		print("total = %d" %len(total))
+
+		print("total = %d" %len(total_withoutleaf))
 		print("nb = %d" %len(blacknodes_withoutleaf))
 		tree_.rb_bh()
-		print(total)
+		print(total_withoutleaf)
+		break
+
 
 
