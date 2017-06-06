@@ -242,7 +242,6 @@ class rb_tree:
 			if x.color is "black":
 				bh = bh + 1
 			x = x.right
-		print(bh)	
 		return bh
 
 # 1. 현재 directory 에서 input.txt 라는 파일을 열어 다음 작업을 수행하도록 프로그램을 작성하시오.
@@ -308,7 +307,7 @@ for i in range(0,len(lines)):
 
 		print("total = %d" %len(total_withoutleaf))
 		print("nb = %d" %len(blacknodes_withoutleaf))
-		tree_.rb_bh()
+		print("bh = %d" %tree_.rb_bh())
 		print(total_withoutleaf)
 		break
 
