@@ -244,7 +244,7 @@ class rb_tree:
 
 
 # input.txt read
-f = open("input.txt", 'r')
+f = open("test02.txt", 'r')
 lines = f.readlines()
 
 tree_ = rb_tree()
@@ -270,7 +270,7 @@ for i in range(0,len(lines)):
 		# print input filename
 		filenames = os.listdir()
 		for filename in filenames:
-			if filename == "input.txt":
+			if filename == f.name:
 				print("filename = %s" %filename)
 
 		tree_.inorder(tree_.root)
