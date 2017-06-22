@@ -2,7 +2,6 @@
 import os
 
 
-
 class Node:
 
     def __init__(self, newval): 
@@ -243,6 +242,7 @@ class rb_tree:
 		return bh
 
 
+
 # input.txt read
 f = open("test02.txt", 'r')
 lines = f.readlines()
@@ -311,7 +311,7 @@ for i in range(0,len(lines)):
 				total_col.append("B")
 
 		for i, j in zip(total_num, total_col):
-		 	print(i, j)
+		  	print(i, j)
 		
 
 		break
